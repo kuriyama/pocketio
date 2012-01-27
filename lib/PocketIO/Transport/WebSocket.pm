@@ -26,6 +26,7 @@ sub dispatch {
     my $version = $hs->version;
 
     my $frame = Protocol::WebSocket::Frame->new(version => $version);
+    $self->conn->{handle} = $handle;
 
     return sub {
         my $respond = shift;

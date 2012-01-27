@@ -121,6 +121,16 @@ sub reconnected {
     return $self;
 }
 
+sub disconnect {
+    my $self = shift;
+
+    my $message = PocketIO::Message->new(type => 'disconnect');
+    $self->write($message);
+
+    $self->disconnected;
+    return $self;
+}
+
 sub disconnected {
     my $self = shift;
 
@@ -301,6 +311,9 @@ sub parse_message {
     elsif ($message->type eq 'heartbeat') {
 
         # TODO
+    }
+    elsif ($message->type eq 'disconnect') {
+        $self->disconnect;
     }
     else {
 

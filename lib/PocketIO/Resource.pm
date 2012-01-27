@@ -74,6 +74,7 @@ sub dispatch {
     );
 
     $conn->type($path->transport_type);
+    $conn->{transport} = $transport;
 
     my $dispatch = eval { $transport->dispatch } or do {
         my $e = $@;
